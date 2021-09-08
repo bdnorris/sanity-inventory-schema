@@ -50,14 +50,35 @@ export default createSchema({
           type: "string"
         },
         {
-          title: "Photography Date",
-          name: "photographyDate",
-          type: "date"
+          title: "Listed",
+          name: "listed",
+          type: "boolean",
         },
         {
-          title: "Photography Set",
-          name: "photographySet",
-          type: "string"
+          title: "Etsy URL",
+          name: "etsyUrl",
+          type: "url",
+          hidden: ({ parent, value }) => value && !parent?.listed
+        },
+        {
+          title: "Sold",
+          name: "sold",
+          type: "boolean",
+          initialValue: false
+        },
+        {
+          title: "Sold Date",
+          name: "soldDate",
+          type: "date",
+          hidden: ({ parent, value }) => !value && !parent?.sold
+        },
+        {
+          title: 'Photo',
+          name: 'photo',
+          type: 'image',
+          options: {
+            storeOriginalFilename: true // <-- Defaults to false
+          },
         },
         {
           title: 'SKU',
@@ -70,6 +91,16 @@ export default createSchema({
             if (!isUnique) return 'SKU is not unique';
             return true;
           })
+        },
+        {
+          title: "Photography Date",
+          name: "photographyDate",
+          type: "date"
+        },
+        {
+          title: "Photography Set",
+          name: "photographySet",
+          type: "string"
         },
         {
           title: "Materials",
@@ -85,6 +116,48 @@ export default createSchema({
           type: "array",
           of: [ { type: 'string' } ]
         },
+        {
+          title: "Weight",
+          name: "weight",
+          type: "string",
+        },
+        {
+          title: "Storage Shelf",
+          name: "storageShelf",
+          type: "string",
+        },
+        {
+          title: "Size",
+          name: "size",
+          type: "text",
+        },
+        {
+          title: "Details",
+          name: "details",
+          type: "text",
+        },
+        {
+          title: "Photo Range",
+          name: "photoRange",
+          type: "array",
+          of: [ {type: 'string'} ]
+        },
+        {
+          title: "Quantity",
+          name: "quantity",
+          type: "number",
+          initialValue: 1
+        },
+        {
+          title: "Price Paid",
+          name: "pricePaid",
+          type: "number",
+        },
+        {
+          title: "Price Listed",
+          name: "priceListed",
+          type: "number",
+        }
       ]
     },
     {
